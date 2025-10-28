@@ -23,7 +23,13 @@ function generator(locals) {
   languages.forEach(lang => {
     const allPosts = locals.posts
       .filter(post => (post.lang || defaultLang) === lang)
-      .sort('-date');
+      .sort((a, b) => {
+        // Posts with original_lang_url have lowest priority
+        if (a.original_lang_url && !b.original_lang_url) return 1;
+        if (!a.original_lang_url && b.original_lang_url) return -1;
+        // Then sort by date descending
+        return b.date.valueOf() - a.date.valueOf();
+      });
 
     if (allPosts.length === 0) return;
 

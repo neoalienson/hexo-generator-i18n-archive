@@ -81,3 +81,21 @@ With daily archives enabled:
 /zh-TW/archives/2024/01/15/
 /zh-CN/archives/2024/01/15/
 ```
+
+## Original Language URL Support
+
+Posts with `original_lang_url` metadata are sorted with lowest priority in archives:
+
+- **Purpose**: Indicates content is only available in original language
+- **Behavior**: Shows redirect notice instead of content
+- **Ordering**: Posts with `original_lang_url` appear last in archive pages
+- **Messages**: Automatically localized based on post language
+
+Example post with original language URL:
+```yaml
+---
+title: "Post Title"
+lang: zh-TW
+original_lang_url: "/en/original-post/"
+---
+```

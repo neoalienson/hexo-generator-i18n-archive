@@ -130,4 +130,38 @@ describe('I18n Archive generator', () => {
     enArchive.data.posts.every(post => post.lang === 'en').should.be.true;
     zhTWArchive.data.posts.every(post => post.lang === 'zh-TW').should.be.true;
   });
+
+  it('sorts posts with original_lang_url last', () => {
+    // Add posts with original_lang_url
+    return Post.insert([
+      {source: 'redirect1', slug: 'redirect1', date: new Date(2024, 0, 1), lang: 'en', original_lang_url: '/original/'},
+      {source: 'normal1', slug: 'normal1', date: new Date(2024, 0, 2), lang: 'en'}
+    ]).then(() => {
+      const newLocals = hexo.locals.toObject();
+      
+      hexo.config.language = ['en'];
+      hexo.config.i18n_archive_generator = {
+        per_page: 0,
+        yearly: false
+      };
+
+      const result = generator.call(hexo, newLocals);
+      const enArchive = result.find(r => r.path === 'archives/');
+      
+      enArchive.should.exist;
+      
+      // Posts without original_lang_url should come first
+      const postsArray = enArchive.data.posts.toArray();
+      const redirectPosts = postsArray.filter(p => p.original_lang_url);
+      const normalPosts = postsArray.filter(p => !p.original_lang_url);
+      
+      // All redirect posts should come after normal posts
+      const lastNormalIndex = postsArray.findLastIndex(p => !p.original_lang_url);
+      const firstRedirectIndex = postsArray.findIndex(p => p.original_lang_url);
+      
+      if (redirectPosts.length > 0 && normalPosts.length > 0) {
+        (lastNormalIndex < firstRedirectIndex).should.be.true;
+      }
+    });
+  });
 });
