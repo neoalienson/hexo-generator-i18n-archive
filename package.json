@@ -1,0 +1,23 @@
+{
+  "name": "hexo-generator-i18n-archive",
+  "version": "1.0.0",
+  "description": "Hexo plugin for generating i18n archive pages",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha index.test.js"
+  },
+  "keywords": [
+    "hexo",
+    "i18n",
+    "archive",
+    "generator"
+  ],
+  "dependencies": {
+    "hexo-pagination": "^4.0.0"
+  },
+  "devDependencies": {
+    "mocha": "^10.0.0",
+    "chai": "^4.3.0",
+    "hexo": "^7.0.0"
+  }
+}
