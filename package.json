@@ -1,17 +1,33 @@
 {
   "name": "hexo-generator-i18n-archive",
   "version": "1.0.0",
-  "description": "Hexo plugin for generating i18n archive pages",
+  "description": "Hexo plugin for generating i18n archive pages with language-specific filtering",
   "main": "index.js",
   "scripts": {
     "test": "mocha index.test.js"
   },
   "keywords": [
     "hexo",
+    "hexo-generator",
     "i18n",
     "archive",
-    "generator"
+    "generator",
+    "multilingual",
+    "pagination"
   ],
+  "author": "neo01.com",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/neo01/hexo-generator-i18n-archive.git"
+  },
+  "bugs": {
+    "url": "https://github.com/neo01/hexo-generator-i18n-archive/issues"
+  },
+  "homepage": "https://github.com/neo01/hexo-generator-i18n-archive#readme",
+  "engines": {
+    "node": ">=12.0.0"
+  },
   "dependencies": {
     "hexo-pagination": "^4.0.0"
   },
